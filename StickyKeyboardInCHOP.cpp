@@ -59,7 +59,7 @@ public:
 		modifier = params.evalModifier(inputs);
 
 		info->numSamples = 1;
-		info->numChannels = keydown_keys.size();
+		info->numChannels = (int32_t)keydown_keys.size();
 		return true;
 	}
 
@@ -86,52 +86,36 @@ public:
 bool StickKeyboardInCHOP::testModifierKey()
 {
 	// None
-	if (modifier == 1) {
-		if (GetAsyncKeyState(VK_SHIFT) || GetAsyncKeyState(VK_CONTROL) || GetAsyncKeyState(VK_MENU))
-			return false;
-	}
+	if (modifier == 1)
+		return !GetAsyncKeyState(VK_SHIFT) && !GetAsyncKeyState(VK_CONTROL) && !GetAsyncKeyState(VK_MENU);
 
 	// Control
-	if (modifier == 2) {
-		if (!GetAsyncKeyState(VK_CONTROL))
-			return false;
-	}
+	if (modifier == 2)
+		return GetAsyncKeyState(VK_CONTROL);
 
 	// Alt
-	if (modifier == 3) {
-		if (!GetAsyncKeyState(VK_MENU))
-			return false;
-	}
+	if (modifier == 3)
+		return GetAsyncKeyState(VK_MENU);
 
 	// Control and Alt
-	if (modifier == 4) {
-		if (!GetAsyncKeyState(VK_CONTROL) || !GetAsyncKeyState(VK_MENU))
-			return false;
-	}
+	if (modifier == 4)
+		return GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_MENU);
 
 	// Shift
-	if (modifier == 5) {
-		if (!GetAsyncKeyState(VK_SHIFT))
-			return false;
-	}
+	if (modifier == 5)
+		return GetAsyncKeyState(VK_SHIFT);
 
 	// Shift and Alt
-	if (modifier == 6) {
-		if (!GetAsyncKeyState(VK_SHIFT) || !GetAsyncKeyState(VK_MENU))
-			return false;
-	}
+	if (modifier == 6)
+		return GetAsyncKeyState(VK_SHIFT) && GetAsyncKeyState(VK_MENU);
 
 	// Shift and Control
-	if (modifier == 7) {
-		if (!GetAsyncKeyState(VK_SHIFT) || !GetAsyncKeyState(VK_CONTROL))
-			return false;
-	}
+	if (modifier == 7)
+		return GetAsyncKeyState(VK_SHIFT) && GetAsyncKeyState(VK_CONTROL);
 
 	// Shift and Control and Alt
-	if (modifier == 8) {
-		if (!GetAsyncKeyState(VK_SHIFT) || !GetAsyncKeyState(VK_CONTROL) || !GetAsyncKeyState(VK_MENU))
-			return false;
-	}
+	if (modifier == 8)
+		return GetAsyncKeyState(VK_SHIFT) && GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_MENU);
 
 	return true;
 };

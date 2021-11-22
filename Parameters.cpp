@@ -101,26 +101,12 @@ Parameters::setup(OP_ParameterManager* manager)
 	}
 	{
 		const char* names[] = {
-			 "Ignore",
-			 "None",
-			 "Control",
-			 "Alt",
-			 "Controlandalt",
-			 "Shift",
-			 "Shiftandalt",
-			 "Shiftandcontrol",
-			 "Shiftandcontrolandalt"
+			"Ignore", "None", "Control", "Alt", "Controlandalt",
+			"Shift", "Shiftandalt", "Shiftandcontrol", "Shiftandcontrolandalt"
 		};
 		const char* labels[] = {
-			"Ignore",
-			"None",
-			"Control",
-			"Alt",
-			"Control and Alt",
-			"Shift",
-			"Shift and Alt",
-			"Shift and Control",
-			"Shift and Control and Alt"
+			"Ignore", "None", "Control", "Alt", "Control and Alt",
+			"Shift", "Shift and Alt", "Shift and Control", "Shift and Control and Alt"
 		};
 
 		OP_StringParameter p;
@@ -128,7 +114,7 @@ Parameters::setup(OP_ParameterManager* manager)
 		p.label = ModifierLabel;
 		p.page = "Keys";
 		p.defaultValue = names[0];
-		OP_ParAppendResult res = manager->appendMenu(p, 2, names, labels);
+		OP_ParAppendResult res = manager->appendMenu(p, 9, names, labels);
 
 		assert(res == OP_ParAppendResult::Success);
 	}

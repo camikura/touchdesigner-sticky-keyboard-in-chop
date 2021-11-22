@@ -33,7 +33,6 @@ class Parameters
 private:
 	vector<string> split(string str, string del);
 	vector<string> enable_keys;
-	int active;
 	int modifier;
 
 public:
