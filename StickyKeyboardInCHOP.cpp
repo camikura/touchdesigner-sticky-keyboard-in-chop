@@ -87,35 +87,35 @@ bool StickKeyboardInCHOP::testModifierKey()
 {
 	// None
 	if (modifier == 1)
-		return !GetAsyncKeyState(VK_SHIFT) && !GetAsyncKeyState(VK_CONTROL) && !GetAsyncKeyState(VK_MENU);
+		return !(GetAsyncKeyState(VK_SHIFT) & 0x8000) && !(GetAsyncKeyState(VK_CONTROL) & 0x8000) && !(GetAsyncKeyState(VK_MENU) & 0x8000);
 
 	// Control
 	if (modifier == 2)
-		return GetAsyncKeyState(VK_CONTROL);
+		return GetAsyncKeyState(VK_CONTROL) & 0x8000;
 
 	// Alt
 	if (modifier == 3)
-		return GetAsyncKeyState(VK_MENU);
+		return GetAsyncKeyState(VK_MENU) & 0x8000;
 
 	// Control and Alt
 	if (modifier == 4)
-		return GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_MENU);
+		return GetAsyncKeyState(VK_CONTROL) & 0x8000 && GetAsyncKeyState(VK_MENU) & 0x8000;
 
 	// Shift
 	if (modifier == 5)
-		return GetAsyncKeyState(VK_SHIFT);
+		return GetAsyncKeyState(VK_SHIFT) & 0x8000;
 
 	// Shift and Alt
 	if (modifier == 6)
-		return GetAsyncKeyState(VK_SHIFT) && GetAsyncKeyState(VK_MENU);
+		return GetAsyncKeyState(VK_SHIFT) & 0x8000 && GetAsyncKeyState(VK_MENU) & 0x8000;
 
 	// Shift and Control
 	if (modifier == 7)
-		return GetAsyncKeyState(VK_SHIFT) && GetAsyncKeyState(VK_CONTROL);
+		return GetAsyncKeyState(VK_SHIFT) & 0x8000 && GetAsyncKeyState(VK_CONTROL) & 0x8000;
 
 	// Shift and Control and Alt
 	if (modifier == 8)
-		return GetAsyncKeyState(VK_SHIFT) && GetAsyncKeyState(VK_CONTROL) && GetAsyncKeyState(VK_MENU);
+		return GetAsyncKeyState(VK_SHIFT) & 0x8000 && GetAsyncKeyState(VK_CONTROL) & 0x8000 && GetAsyncKeyState(VK_MENU) & 0x8000;
 
 	return true;
 };
@@ -131,21 +131,21 @@ bool StickKeyboardInCHOP::getKeyPressed(string key)
 		return false;
 
 	if (key == "comma")
-		return GetAsyncKeyState(VK_OEM_COMMA);
+		return GetAsyncKeyState(VK_OEM_COMMA) & 0x8000;
 
 	if (key == "period")
-		return GetAsyncKeyState(VK_OEM_PERIOD);
+		return GetAsyncKeyState(VK_OEM_PERIOD) & 0x8000;
 
 	int code = (int)key[0];
 
 	// 0 to 9
 	if (code >= 48 && code <= 57) {
-		return GetAsyncKeyState(code);
+		return GetAsyncKeyState(code) & 0x8000;
 	}
 
 	// a to z
 	if (code >= 97 && code <= 122) {
-		return GetAsyncKeyState(code-32);
+		return GetAsyncKeyState(code-32) & 0x8000;
 	}
 
 	return false;
