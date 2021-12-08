@@ -22,7 +22,7 @@
 
 using namespace std;
 
-class StickKeyboardInCHOP : public CHOP_CPlusPlusBase
+class StickyKeyboardInCHOP : public CHOP_CPlusPlusBase
 {
 private:
 	vector<string> keydown_keys;
@@ -35,13 +35,13 @@ private:
 	Parameters params;
 
 public:
-	StickKeyboardInCHOP(const OP_NodeInfo* info)
+	StickyKeyboardInCHOP(const OP_NodeInfo* info)
 	{
 		active = false;
 		modifier = 0;
 	}
 
-	virtual ~StickKeyboardInCHOP()
+	virtual ~StickyKeyboardInCHOP()
 	{
 	}
 
@@ -83,7 +83,7 @@ public:
 	}
 };
 
-bool StickKeyboardInCHOP::testModifierKey()
+bool StickyKeyboardInCHOP::testModifierKey()
 {
 	// None
 	if (modifier == 1)
@@ -120,7 +120,7 @@ bool StickKeyboardInCHOP::testModifierKey()
 	return true;
 };
 
-bool StickKeyboardInCHOP::getKeyPressed(string key)
+bool StickyKeyboardInCHOP::getKeyPressed(string key)
 {
 	// active flag test
 	if (!active)
@@ -169,12 +169,12 @@ extern "C"
 
 	DLLEXPORT CHOP_CPlusPlusBase* CreateCHOPInstance(const OP_NodeInfo* info)
 	{
-		return new StickKeyboardInCHOP(info);
+		return new StickyKeyboardInCHOP(info);
 	}
 
 	DLLEXPORT void DestroyCHOPInstance(CHOP_CPlusPlusBase* instance)
 	{
-		delete (StickKeyboardInCHOP*)instance;
+		delete (StickyKeyboardInCHOP*)instance;
 	}
 
 };
