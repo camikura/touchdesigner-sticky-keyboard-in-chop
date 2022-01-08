@@ -11,12 +11,15 @@
 
 using namespace std;
 
-Parameters::Parameters() {
-	for (char c = '0'; c <= '9'; c++) {
+Parameters::Parameters()
+{
+	for (char c = '0'; c <= '9'; c++)
+	{
 		string str(1, c);
 		enable_keys.push_back(str);
 	}
-	for (char c = 'a'; c <= 'z'; c++) {
+	for (char c = 'a'; c <= 'z'; c++)
+	{
 		string str(1, c);
 		enable_keys.push_back(str);
 	}
@@ -24,14 +27,17 @@ Parameters::Parameters() {
 	modifier = 0;
 }
 
-Parameters::~Parameters() {
+Parameters::~Parameters()
+{
 }
 
-vector<string> Parameters::split(string str, string del = " ") {
+vector<string> Parameters::split(string str, string del = " ")
+{
 	vector<string> result;
 	size_t start = 0;
 	size_t end = str.find(del);
-	while (end != -1) {
+	while (end != -1)
+	{
 		result.push_back(str.substr(start, end - start));
 		start = end + del.size();
 		end = str.find(del, start);
@@ -40,18 +46,21 @@ vector<string> Parameters::split(string str, string del = " ") {
 	return result;
 }
 
-vector<string> Parameters::evalKeys(const OP_Inputs* input)
+vector<string> Parameters::evalKeys(const OP_Inputs *input)
 {
 	string str = input->getParString(KeysName);
 
 	vector<string> keys;
-	for (auto k : split(str)) {
+	for (auto k : split(str))
+	{
 		if (k == "keycomma")
 			keys.push_back("comma");
 		else if (k == "keyperiod")
 			keys.push_back("period");
-		else {
-			for (auto ek : enable_keys) {
+		else
+		{
+			for (auto ek : enable_keys)
+			{
 				if (k == ek)
 					keys.push_back(k);
 			}
@@ -61,12 +70,12 @@ vector<string> Parameters::evalKeys(const OP_Inputs* input)
 	return keys;
 }
 
-bool Parameters::evalActive(const OP_Inputs* input)
+bool Parameters::evalActive(const OP_Inputs *input)
 {
 	return input->getParInt(ActiveName) == 0;
 }
 
-int Parameters::evalModifier(const OP_Inputs* input)
+int Parameters::evalModifier(const OP_Inputs *input)
 {
 	return input->getParInt(ModifierName);
 }
@@ -75,12 +84,11 @@ int Parameters::evalModifier(const OP_Inputs* input)
 
 #pragma region Setup
 
-void
-Parameters::setup(OP_ParameterManager* manager)
+void Parameters::setup(OP_ParameterManager *manager)
 {
 	{
-		const char* names[] = { "On", "Off" };
-		const char* labels[] = { "On", "Off" };
+		const char *names[] = {"On", "Off"};
+		const char *labels[] = {"On", "Off"};
 
 		OP_StringParameter p;
 		p.name = ActiveName;
@@ -100,14 +108,12 @@ Parameters::setup(OP_ParameterManager* manager)
 		assert(res == OP_ParAppendResult::Success);
 	}
 	{
-		const char* names[] = {
-			"Ignore", "None", "Control", "Alt", "Controlandalt",
-			"Shift", "Shiftandalt", "Shiftandcontrol", "Shiftandcontrolandalt"
-		};
-		const char* labels[] = {
-			"Ignore", "None", "Control", "Alt", "Control and Alt",
-			"Shift", "Shift and Alt", "Shift and Control", "Shift and Control and Alt"
-		};
+		const char *names[] = {
+				"Ignore", "None", "Control", "Alt", "Controlandalt",
+				"Shift", "Shiftandalt", "Shiftandcontrol", "Shiftandcontrolandalt"};
+		const char *labels[] = {
+				"Ignore", "None", "Control", "Alt", "Control and Alt",
+				"Shift", "Shift and Alt", "Shift and Control", "Shift and Control and Alt"};
 
 		OP_StringParameter p;
 		p.name = ModifierName;
