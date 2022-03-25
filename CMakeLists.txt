@@ -3,4 +3,4 @@ project(StickyKeyboardInCHOP)
 
 include_directories(include)
 
-add_library(StickyKeyboardInCHOP MODULE src/main.cpp src/Parameters.cpp)
+add_library(StickyKeyboardInCHOP MODULE src/main.cpp src/param.cpp)
