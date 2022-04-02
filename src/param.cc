@@ -11,8 +11,6 @@ Parameters::Parameters() {
     string str(1, c);
     enable_keys.push_back(str);
   }
-
-  modifier = 0;
 }
 
 Parameters::~Parameters() {}
@@ -53,8 +51,8 @@ bool Parameters::evalActive(const OP_Inputs *input) {
   return input->getParInt(ActiveName) == 0;
 }
 
-int Parameters::evalModifier(const OP_Inputs *input) {
-  return input->getParInt(ModifierName);
+Modifier Parameters::evalModifier(const OP_Inputs *input) {
+  return (Modifier)input->getParInt(ModifierName);
 }
 
 void Parameters::setup(OP_ParameterManager *manager) {

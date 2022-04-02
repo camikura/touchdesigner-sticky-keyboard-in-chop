@@ -1,11 +1,14 @@
+#ifndef STICKY_KEYBOARD_IN_CHOP_INCLUDE_MAIN_H_
+#define STICKY_KEYBOARD_IN_CHOP_INCLUDE_MAIN_H_
+
 #include <windows.h>
 
 #include <iostream>
 #include <string>
-#include <vector>
 
 #include "CHOP_CPlusPlusBase.h"
 #include "CPlusPlus_Common.h"
+#include "keystate.h"
 #include "param.h"
 
 using namespace std;
@@ -26,11 +29,7 @@ class StickyKeyboardInCHOP : public CHOP_CPlusPlusBase {
 
  private:
   Parameters params;
-
-  vector<string> keydown_keys;
-  bool active = false;
-  int modifier = 0;
-
-  bool testModifierKey();
-  bool getKeyPressed(string);
+  Keystate* keystate;
 };
+
+#endif  // STICKY_KEYBOARD_IN_CHOP_INCLUDE_MAIN_H_
