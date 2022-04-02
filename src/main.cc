@@ -30,7 +30,7 @@ bool StickyKeyboardInCHOP::getOutputInfo(CHOP_OutputInfo *info,
 void StickyKeyboardInCHOP::getChannelName(int32_t index, OP_String *name,
                                           const OP_Inputs *inputs,
                                           void *reserved1) {
-  name->setString(format("k{}", keystate->get_keys()[index]).c_str());
+  name->setString(("k" + keystate->get_keys()[index]).c_str());
 }
 
 void StickyKeyboardInCHOP::execute(CHOP_Output *output, const OP_Inputs *inputs,
